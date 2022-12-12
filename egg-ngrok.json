@@ -1,0 +1,51 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "name": "ngrok",
+    "author": "notmarvin",
+    "description": "ngrok reverse proxy.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/marvintheskid\/docker-ngrok-pterodactyl:latest": "ghcr.io\/marvintheskid\/docker-ngrok-pterodactyl:latest"
+    },
+    "file_denylist": [],
+    "startup": "ngrok start --config {{CONFIGURATION_FILE}} --all",
+    "config": {
+        "files": "{\r\n    \"ngrok-config.yml\": {\r\n        \"parser\": \"yml\",\r\n        \"find\": {\r\n            \"authtoken\": \"{{server.build.env.AUTH_TOKEN}}\",\r\n            \"log_level\": \"info\",\r\n            \"log\": \"stdout\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n     \"done\": \"msg=\\\"started tunnel\\\"\"   \r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Configuration",
+            "description": "Configuration file path.",
+            "env_variable": "CONFIGURATION_FILE",
+            "default_value": "ngrok-config.yml",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Authentication Token",
+            "description": "Authentication token.",
+            "env_variable": "AUTH_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}
